@@ -14,8 +14,8 @@ var storedItem = localStorage.getItem("storedItem);
 function save(){
 
 var Item = document.getElementById("input").value;
-localStorage.setItem("storedItem", item);
-document.getElementById("savedText").innerHTML = item + "SAVED";
+localStorage.setItem("storedItem", Item);
+document.getElementById("savedText").innerHTML = Item + "SAVED";
 
 }
 function get() {
