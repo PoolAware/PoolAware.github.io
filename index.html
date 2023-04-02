@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body onload = "get()">
 <p id="savedTest"> </p>
 <p id="openedTest"> </p>
-<input type="text" id = "input"/>
+<input type="text" id="input"/>
 <button onclick="save()"> SAVE </button>
+ 
+ </body>
+ 
 <script>
 
 var storedItem = localStorage.getItem("storedItem);
