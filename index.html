@@ -15,13 +15,13 @@ function save(){
 
 var Item = document.getElementById("input").value;
 localStorage.setItem("storedItem", Item);
-document.getElementById("savedText").innerHTML = Item + "SAVED";
+document.getElementById("savedText").innerHTML = Item + " SAVED";
 
 }
 function get(){
 
 localStorage.getItem("storedItem");
-document.getElementById("openedText").innerHTML = storedItem + "OPENED";
+document.getElementById("openedText").innerHTML = storedItem + " OPENED";
 
 }
 </script>
