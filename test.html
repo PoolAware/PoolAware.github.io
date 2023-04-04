@@ -5,28 +5,23 @@
 <p>I'm hosted with GitHub Pages.</p>
  <script>
 function previewFile() {
-  const content = document.querySelector(".content");
-  const [file] = document.querySelector("input[type=file]").files;
-  const reader = new FileReader();
-
-  reader.addEventListener(
-    "load",
-    () => {
-      // this will then display a text file
-      content.innerText = reader.result;
-    },
-    false
-  );
-
-  if (file) {
-    reader.readAsText(file);
-  }
+  const fs = require('fs');
+      
+    // Data which will write in a file.
+    let data = "Learning how to write in a file.";
+      
+    // Write data in 'Output.txt' .
+    fs.writeFile('text.html', data, (err)) {
+          
+        // In case of a error throw err.
+        if (err) throw err;
+    });
 }
 </script>
 <h2>Demo JavaScript in Head</h2>
 
 <p id="demo">A Paragraph</p>
-<input type="file" onchange="previewFile()" /><br />
+<input type="button" onchange="previewFile()" /><br />
 <p class="content"></p>
 </body>
 </html>
