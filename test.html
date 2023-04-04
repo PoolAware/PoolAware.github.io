@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Hello Sir!</h1>
+<h1>Hello Sir!!!</h1>
 <p>I'm hosted with GitHub Pages.</p>
  <script>
 function previewFile() {
   const fs = require('fs')
       
     // Data which will write in a file.
-    let data = "Learning how to write in a file."
+    let data = "<link href="txtstyle.css" rel="stylesheet" type="text/css" /> Learning how to write in a file."
       
     // Write data in 'Output.txt' .
-    fs.writeFile('Output.txt', data, (err) => {
+    fs.writeFile('text.html', data, (err) => {
           
         // In case of a error throw err.
         if (err) throw err;
