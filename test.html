@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Hello Sir</h1>
+<h1>Hello Sir!</h1>
 <p>I'm hosted with GitHub Pages.</p>
  <script>
 function previewFile() {
-  const fs = require('fs');
+  const fs = require('fs')
       
     // Data which will write in a file.
-    let data = "Learning how to write in a file.";
+    let data = "Learning how to write in a file."
       
     // Write data in 'Output.txt' .
-    fs.writeFile('text.html', data, (err)) {
+    fs.writeFile('Output.txt', data, (err) => {
           
         // In case of a error throw err.
         if (err) throw err;
-    });
+    })
 }
 </script>
 <h2>Demo JavaScript in Head</h2>
 
 <p id="demo">A Paragraph</p>
-<input type="button" onchange="previewFile()" /><br />
+<button onclick="previewFile()"> SAVE!!! </button>
 <p class="content"></p>
 </body>
 </html>
