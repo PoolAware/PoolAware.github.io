@@ -1,48 +1,19 @@
 <!DOCTYPE html>
 <html>
-<body onload="get()">
-<p id="savedText"> </p>
-<p id="openedText"> </p>
-<input type="text" id="input"/>
-<button onclick="save()"> SAVE!!! </button>
- 
-</body>
-<script>
-
-var storedItem = localStorage.getItem("storedItem");
-
-function save(){
-
-var Item = document.getElementById("input").value;
-localStorage.setItem("storedItem", Item);
-document.getElementById("savedText").innerHTML = Item + " SAVED";
-
-}
-function get(){
-
-localStorage.getItem("storedItem");
-document.getElementById("openedText").innerHTML = storedItem + " OPENED";
-
-}
-</script>
- <!--
- <p></p>
- <label for="Name">Namererer:</label>
-<form action="/test">
-  <label for="fname">Username:</label><br>
-  <input type="text" id="fname" name="fname" placeholder="Username"><br>
-  <label for="lname">Password:</label><br>
-  <input type="text" id="lname" name="lname" placeholder="Password"><br><br>
-  <input type="submit" value="Submit"> 
-</form>
- <script>
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Paragraph changed.";
-}
-</script>
 <h2>Demo JavaScript in Head</h2>
+<form class="form">
+<label>
+  GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
+</label>
 
+<label>
+  GitHub Repo Owner: <input required name="owner" placeholder="" />
+</label>
+  <label>
+  GitHub Repo Name: <input required name="repo" placeholder="" />
+</label>
+  <button type="submit"> upload </button>
+  <div class="log"></div>
+</form>
 <p id="demo">A Paragraph</p>
-<button type="button" onclick="myFunction()">Try it</button>
--->
 </html>
