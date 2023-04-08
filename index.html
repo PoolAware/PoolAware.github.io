@@ -15,7 +15,6 @@
   <button type="submit"> upload </button>
   <div class="log"></div>
 </form>
-<script>
 <div class="container">
   <h5>Image info</h5>
   <input type="file" accept="image/*" class="local" />
@@ -24,6 +23,7 @@
 </div>
 <p id="demo">A Paragraph</p>
  // upload image to github
+<script>
 function uploadImage(data) {
   return fetch(
     `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
