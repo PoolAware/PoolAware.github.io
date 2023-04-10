@@ -1,0 +1,65 @@
+#import modules
+import network
+import socket
+import urequests
+from time import sleep
+import os
+import ubinascii
+import urequests
+import config
+#import config
+#from twilio.rest import Client
+
+ssid = 'AAA' #Your network name
+password = '12345678' #Your WiFi password
+
+def connect():
+    #Connect to WLAN
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(ssid, password)
+    while wlan.isconnected() == False:
+        x = wlan.scan() #Outputs a list of tuples that describe local networks
+        for i in x:
+            print(i[0].decode()) #Print the name of the local networks in string form
+        print('Waiting for connection...')
+        sleep(1)
+    ip = wlan.ifconfig()[0]
+    print(f'Connected on {ip}')
+    return ip
+
+x = connect()
+print(x)
+# Example 1. Make a GET request for google.com and print HTML
+# Print the html content from google.com
+print("1. Querying google.com:")
+r = urequests.get("http://www.google.com")
+print(r.content)
+r.close()
+
+class TwilioSMS:
+    base_url = 'https://api.twilio.com/2010-04-01'
+
+    def __init__(self, account_sid, auth_token):
+        self.twilio_account_sid = account_sid
+        self.twilio_auth = ubinascii.b2a_base64('{sid}:{token}'.format(
+            sid=account_sid, token=auth_token)).strip()
+
+    def create(self, body, from_, to):
+        data = 'Body={body}&From={from_}&To={to}'.format(
+            body=body, from_=from_.replace('+', '%2B'),
+            to=to.replace('+', '%2B'))
+        r = urequests.post(
+            '{base_url}/Accounts/{sid}/Messages.json'.format(
+                base_url=self.base_url, sid=self.twilio_account_sid),
+            data=data,
+            headers={'Authorization': b'Basic ' + self.twilio_auth,
+                     'Content-Type': 'application/x-www-form-urlencoded'})
+        print('SMS sent with status code', r.status_code)
+        print('Response: ', r.text)
+        
+sms = TwilioSMS(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
+sms.create(body='Someone is at the door', from_=config.TWILIO_FROM_NUMBER,
+           to=config.NOTIFICATION_NUMBER)
+        
+# Download the helper library from https://www.twilio.com/docs/python/install
