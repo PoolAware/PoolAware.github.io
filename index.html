@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <form class="form">
- <label>
+<label>
   GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
 </label>
+
 <label>
   GitHub Repo Owner: <input required name="owner" placeholder="" />
 </label>
   <label>
-  GitHub Ro Name: <input required name="repo" placeholder="" />
+  GitHub Repo Name: <input required name="repo" placeholder="" />
 </label>
   <button type="submit"> upload </button>
   <div class="log"></div>
@@ -125,7 +126,7 @@ window.onload = () => {
     for (let [key, value] of formData.entries()) {
       data[key] = value;
     }
-    data['token'] = process.env.TOKEN
+    // 获取图片信息
     uploadImage({
       ...data,
       ...image
