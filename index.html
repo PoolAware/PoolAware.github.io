@@ -29,7 +29,7 @@ function uploadImage(data) {
       method: "PUT",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${data.token}`
+        Authorization: process.env.TOKEN
       },
       body: JSON.stringify({
         message: "upload image from api",
