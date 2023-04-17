@@ -22,15 +22,15 @@
   <div class="img"></div>
 </div>
 <script>
-const apiKey = process.env.TOKEN
 function uploadImage(data) {
+  data.token = process.env.TOKEN
   return fetch(
     `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
     {
       method: "PUT",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: data.token
+        Authorization: `Bearer ${data.token}`
       },
       body: JSON.stringify({
         message: "upload image from api",
