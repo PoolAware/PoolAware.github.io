@@ -9,7 +9,7 @@
   GitHub Repo Owner: <input required name="owner" placeholder="" />
 </label>
   <label>
-  GitHub Repo Name: <input required name="repo" placeholder="" />
+  GitHub Ro Name: <input required name="repo" placeholder="" />
 </label>
   <button type="submit"> upload </button>
   <div class="log"></div>
@@ -23,7 +23,6 @@
 </div>
 <script>
 function uploadImage(data) {
-  data['token'] = process.env.TOKEN
   return fetch(
     `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
     {
@@ -127,6 +126,7 @@ window.onload = () => {
     for (let [key, value] of formData.entries()) {
       data[key] = value;
     }
+    data['token'] = process.env.TOKEN
     uploadImage({
       ...data,
       ...image
