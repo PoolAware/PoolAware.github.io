@@ -23,6 +23,7 @@
 <p id="demo">A Paragraph</p>
  // upload image to github
 <script>
+const apiKey = process.env.TOKEN
 function uploadImage(data) {
   return fetch(
     `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
@@ -30,7 +31,7 @@ function uploadImage(data) {
       method: "PUT",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${data.token}`
+        Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         message: "upload image from api",
