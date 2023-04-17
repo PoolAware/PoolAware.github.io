@@ -14,16 +14,15 @@
   <button type="submit"> upload </button>
   <div class="log"></div>
 </form>
+
 <div class="container">
   <h5>Image info</h5>
   <input type="file" accept="image/*" class="local" />
   <button class="paste"> Paste from clipboard </button>
   <div class="img"></div>
 </div>
-<p id="demo">A Paragraph</p>
- // upload image to github
 <script>
-const apiKey = process.env.TOKEN
+//const apiKey = process.env.TOKEN
 function uploadImage(data) {
   return fetch(
     `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
@@ -31,7 +30,7 @@ function uploadImage(data) {
       method: "PUT",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${apiKey}`
+        Authorization: `Bearer ${data.token}`
       },
       body: JSON.stringify({
         message: "upload image from api",
@@ -49,9 +48,9 @@ function insertImage(src) {
 
 function getRandomName(type) {
   if (type.endsWith("png")) {
-    return [Date.now(), ".txt"].join("");
+    return [Date.now(), ".png"].join("");
   }
-  return [Date.now(), ".txt"].join("");
+  return [Date.now(), ".jpeg"].join("");
 }
 
 function blobToBase64(blob) {
