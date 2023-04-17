@@ -1,29 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <p id="myPara">This is para.</p>
-    <button type="button" onclick="changeText()">Click Me</button>
-    <script>
-    function doesFileExist(urlToFile) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile, false);
-    xhr.send();
-     
-    if (xhr.status == "404") {
-        return false;
-    } else {
-        return true;
-    }
-}
-    function changeText(){
-      var result = doesFileExist("https://www.kirupa.com/ssi/newDesign/kirupaLogo_large.png");
-      var element = document.getElementById("myPara");
-       if (result == true) {
-        element.innerHTML = "True";
-        } else {
-        element.innerHTML = "False";
-        }
-    }
-    </script>
 <form class="form">
 <label>
   GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
