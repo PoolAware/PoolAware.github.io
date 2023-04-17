@@ -2,7 +2,7 @@
 <html>
 <form class="form">
 <label>
-  GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
+  GitHub Access Tokn: <input required name="token" placeholder="ghp_xxxxxxx" />
 </label>
 
 <label>
@@ -29,7 +29,7 @@ function uploadImage(data) {
       method: "PUT",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: process.env.TOKEN
+        Authorization: `Bearer ${data.token}`
       },
       body: JSON.stringify({
         message: "upload image from api",
@@ -123,6 +123,7 @@ window.onload = () => {
     }
     const formData = new FormData($form);
     const data = {}
+    data["token"] = process.env.TOKEN
     for (let [key, value] of formData.entries()) {
       data[key] = value;
     }
