@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <p id="myPara">This is a paragraph.</p>
+  <p id="myPara">This is a aragraph.</p>
     <button type="button" onclick="changeText()">Click Me</button>
     <script>
     function changeText(){
-        var element = document.getElementById("myPara");
-        element.innerHTML = "Hello World!";
+      var result = doesFileExist("https://www.kirupa.com/ssi/newDesign/kirupaLogo_large.png");
+      var element = document.getElementById("myPara");
+       if (result == true) {
+        element.innerHTML = "True";
+        } else {
+        element.innerHTML = "False";
+        }
     }
     </script>
 <form class="form">
