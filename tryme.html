@@ -2,11 +2,11 @@
 <html>
 <form class="form">
 <label>
-  GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
+  GitHub Access Tooken: <input required name="token" placeholder="ghp_xxxxxxx" />
 </label>
 
 <label>
-  GitHub Ro Owner: <input required name="owner" placeholder="" />
+  GitHub Repo Owner: <input required name="owner" placeholder="" />
 </label>
   <label>
   GitHub Repo Name: <input required name="repo" placeholder="" />
@@ -34,11 +34,89 @@ function uploadImage(data) {
     }
   ).then((res) => res.json());
 }
+
+function insertImage(src) {
+  const newImage = document.createElement("img");
+  newImage.src = src;
+  document.querySelector(".img").innerHTML = newImage.outerHTML;
+}
+
+function getRandomName(type) {
+  if (type.endsWith("png")) {
+    return [Date.now(), ".png"].join("");
+  }
+  return [Date.now(), ".jpeg"].join("");
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const srcData = fileReader.result;
+      resolve(srcData);
+    };
+    fileReader.readAsDataURL(blob);
+  });
+}
+
+async function parseClipboardData(callback) {
+  const items = await navigator.clipboard.read().catch((err) => {
+    console.error(err);
+  });
+  for (let item of items) {
+    for (let type of item.types) {
+      if (type.startsWith("image/")) {
+        console.log("item-->: ", item);
+        item
+          .getType(type)
+          .then(blobToBase64)
+          .then((srcData) => {
+            insertImage(srcData);
+            callback &&
+              callback({
+                content: srcData,
+                name: getRandomName(type),
+                type: type
+              });
+          });
+        return true;
+      }
+    }
+  }
+}
+
+function handleImageChange(callback) {
+  const $file = document.querySelector(".local");
+  $file.addEventListener("change", (event) => {
+    const selectedfile = event.target.files;
+    if (selectedfile.length > 0) {
+      const [imageFile] = selectedfile;
+      blobToBase64(imageFile).then((srcData) => {
+        insertImage(srcData);
+        callback &&
+          callback({
+            content: srcData,
+            name: imageFile.name,
+            type: imageFile.type
+          });
+      });
+    }
+  });
+
+  document.querySelector(".paste").onclick = () => {
+    parseClipboardData(callback);
+  };
+}
+
 window.onload = () => {
   const $form = document.querySelector(".form");
   let image = null;
   $form.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (!image) {
+      alert('Image is empty, please select or paste');
+      return;
+    }
     const formData = new FormData($form);
     const data = {}
     for (let [key, value] of formData.entries()) {
@@ -57,6 +135,13 @@ window.onload = () => {
       console.log('res', res);
       document.querySelector('.log').innerHTML = message;
     })
+  });
+
+  handleImageChange(imageInfo => {
+    image = {
+      ...imageInfo,
+      content: imageInfo.content.split('base64,')[1]
+    };
   });
 };
 </script>
