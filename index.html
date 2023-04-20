@@ -113,6 +113,7 @@ function handleImageChange(callback) {
 }
 
 window.onload = () => {
+  console.log(env.TOKEN);
   const $form = document.querySelector(".form");
   let image = null;
   $form.addEventListener("submit", (event) => {
@@ -123,11 +124,9 @@ window.onload = () => {
     }
     const formData = new FormData($form);
     const data = {}
-    data["token"] = process.env.TOKEN
     for (let [key, value] of formData.entries()) {
       data[key] = value;
     }
-    // 获取图片信息
     uploadImage({
       ...data,
       ...image
