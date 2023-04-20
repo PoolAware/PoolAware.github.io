@@ -6,7 +6,7 @@
 </label>
 
 <label>
-  GitHub Repo Owner: <input required name="owner" placeholder="" />
+  GitHub Ro Owner: <input required name="owner" placeholder="" />
 </label>
   <label>
   GitHub Repo Name: <input required name="repo" placeholder="" />
@@ -39,10 +39,6 @@ window.onload = () => {
   let image = null;
   $form.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!image) {
-      alert('Image is empty, please select or paste');
-      return;
-    }
     const formData = new FormData($form);
     const data = {}
     for (let [key, value] of formData.entries()) {
