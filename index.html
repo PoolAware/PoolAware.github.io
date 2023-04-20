@@ -2,7 +2,7 @@
 <html>
 <form class="form">
 <label>
-  GitHub Access Tken: <input required name="token" placeholder="ghp_xxxxxxx" />
+  GitHub Access Tooken: <input required name="token" placeholder="ghp_xxxxxxx" />
 </label>
 
 <label>
@@ -30,8 +30,8 @@ function uploadImage(data) {
       headers: {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${data.token}`
-      },
-      //body: JSON.stringify({
+      }
+      //,body: JSON.stringify({
         //message: "upload image from api",
         //content: data.content
       //})
