@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<form class="form">
+<label>
+  GitHub Access Tooken: <input required name="token" placeholder="ghp_xxxxxxx" />
+</label>
+
+<label>
+  GitHub Repo Owner: <input required name="owner" placeholder="" />
+</label>
+  <label>
+  GitHub Repo Name: <input required name="repo" placeholder="" />
+</label>
+  <button type="submit"> upload </button>
+  <div class="log"></div>
+</form>
+
+<div class="container">
+  <h5>Image info</h5>
+  <input type="file" accept="image/*" class="local" />
+  <button class="paste"> Paste from clipboard </button>
+  <div class="img"></div>
+</div>
+<script>
+function uploadImage(data) {
+  return fetch(
+    `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
+    {
+      method: "DELETE",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${data.token}`
+      }
+    }
+  ).then((res) => res.json());
+}
+window.onload = () => {
+  const $form = document.querySelector(".form");
+  let image = null;
+  $form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!image) {
+      alert('Image is empty, please select or paste');
+      return;
+    }
+    const formData = new FormData($form);
+    const data = {}
+    for (let [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+    uploadImage({
+      ...data,
+      ...image
+    }).then(res => {
+      let message = '';
+      if (res.message) {
+        message = res.message
+      } else {
+        message = `upload success: <a href="${res.content.html_url}">${res.content.html_url}</a>`
+      }
+      console.log('res', res);
+      document.querySelector('.log').innerHTML = message;
+    })
+  });
+};
+</script>
+</html>
