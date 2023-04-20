@@ -2,7 +2,7 @@
 <html>
 <form class="form">
 <label>
-  GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
+  GitHub Access Tken: <input required name="token" placeholder="ghp_xxxxxxx" />
 </label>
 
 <label>
@@ -26,7 +26,7 @@ function uploadImage(data) {
   return fetch(
     `https://api.github.com/repos/${data.owner}/${data.repo}/contents/${data.name}`,
     {
-      method: "PUT",
+      method: "DELETE",
       headers: {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${data.token}`
