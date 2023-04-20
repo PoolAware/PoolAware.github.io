@@ -31,10 +31,10 @@ function uploadImage(data) {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${data.token}`
       },
-      body: JSON.stringify({
-        message: "upload image from api",
-        content: data.content
-      })
+      //body: JSON.stringify({
+        //message: "upload image from api",
+        //content: data.content
+      //})
     }
   ).then((res) => res.json());
 }
