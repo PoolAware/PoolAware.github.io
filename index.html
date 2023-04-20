@@ -2,7 +2,7 @@
 <html>
 <form class="form">
 <label>
-  GitHub Access Tokn: <input required name="token" placeholder="ghp_xxxxxxx" />
+  GitHub Access Token: <input required name="token" placeholder="ghp_xxxxxxx" />
 </label>
 
 <label>
@@ -113,7 +113,6 @@ function handleImageChange(callback) {
 }
 
 window.onload = () => {
-  console.log(env.TOKEN);
   const $form = document.querySelector(".form");
   let image = null;
   $form.addEventListener("submit", (event) => {
@@ -127,6 +126,7 @@ window.onload = () => {
     for (let [key, value] of formData.entries()) {
       data[key] = value;
     }
+    // 获取图片信息
     uploadImage({
       ...data,
       ...image
